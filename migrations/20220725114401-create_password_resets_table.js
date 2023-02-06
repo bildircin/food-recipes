@@ -6,34 +6,23 @@ module.exports = {
      * Add altering commands here.
      *
      * Example:*/
-     await queryInterface.createTable('user_roles', { 
+     await queryInterface.createTable('password_resets', { 
         id:{
             type:Sequelize.INTEGER,
             allowNull:false,
             primaryKey:true,
             autoIncrement:true
         },
-        userId:{
-            type:Sequelize.INTEGER,
-            allowNull:false
+        email:{
+          type:Sequelize.STRING,
+          allowNull:false,
+          unique:true
         },
-        roleId:{
-            type:Sequelize.INTEGER,
+        uuid:{
+            type:Sequelize.STRING,
             allowNull:false
-        },
-        createdByUserID:{
-            type:Sequelize.INTEGER,
-            allowNull:true
         },
         createdDate:{
-            type:Sequelize.DATE,
-            allowNull:false
-        },
-        modifiedByUserID:{
-            type:Sequelize.INTEGER,
-            allowNull:true
-        },
-        modifiedDate:{
             type:Sequelize.DATE,
             allowNull:false
         }
@@ -46,7 +35,7 @@ module.exports = {
      * Add reverting commands here.
      *
      * Example:*/
-     await queryInterface.dropTable('user_roles');
+     await queryInterface.dropTable('password_resets');
      
   }
 };

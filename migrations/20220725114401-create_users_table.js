@@ -46,7 +46,7 @@ module.exports = {
         },
         createdByUserID:{
             type:Sequelize.INTEGER,
-            allowNull:false
+            allowNull:true
         },
         createdDate:{
             type:Sequelize.DATE,
@@ -54,7 +54,7 @@ module.exports = {
         },
         modifiedByUserID:{
             type:Sequelize.INTEGER,
-            allowNull:false
+            allowNull:true
         },
         modifiedDate:{
             type:Sequelize.DATE,

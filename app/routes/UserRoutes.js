@@ -11,6 +11,24 @@ router.use(function(req, res, next) {
     next();
 });
 
+router.get("/", userController.home)
+
+router.post("/sifre-yenileme", userController.passwordReset)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get("/api/test/all", userController.allAccess);
 
 router.get(

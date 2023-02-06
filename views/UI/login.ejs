@@ -1,0 +1,154 @@
+		
+<div id="container">
+    <div id="content" class="clearfix homepage"><!-- SLIDER STARTS HERE -->
+		<div class="tabed" id="login-signup-forgot">
+
+			<ul class="tabs">
+				<li class="current">Giriş Yap<span></span></li>
+				<li>Şifremi Unuttum<span></span></li>
+			</ul>
+
+			<div class="block current">
+				<form id="login_form" action="/signinAjax" method="post">
+
+					<p>
+						<label for="username">Kullanıcı Adı</label>
+						<input id="username" type="text" name="userName">
+					</p>
+					<p>
+						<label for="password">Şifre</label>
+						<input id="password" type="password" name="password">
+					</p>
+					<p>
+						<input type="checkbox" value="forever" name="rememberme" id="remember" class="checkbox">
+						<label class="checkbox-label" for="remember">Beni Hatırla</label>
+						<br>
+						<input id="login-submit" class="submit_button readmore" type="submit" value="Giriş"
+								name="submit">
+
+						<img id="login-loader"
+								src="https://foodrecipes.inspirythemes.com/bootstrap/wp-content/themes/inspirythemes-food-recipes/images/loading.gif"
+								alt="Loader"/>
+						<span id="alert_content"></span>
+					</p>
+					<p class="status"></p>
+				</form>
+			</div>
+
+			
+			<div class="block">
+				<form action="/sifre-yenileme" id="forgot_password_form" method="post">
+					<p style="margin-bottom: 10px;">
+						<label for="send_email" class="forgot-email">Email</label>
+						<input type="text" name="sendEmail" value="" id="send_email"/>
+						<img id="login-loader-email"
+								src="https://foodrecipes.inspirythemes.com/bootstrap/wp-content/themes/inspirythemes-food-recipes/images/loading.gif"
+								alt="Loader"/>
+						<span id="alert_content_email"></span>
+					</p>
+					<p>
+						<input type="submit" class="readmore" name="user-submit" value="Yeni Parola Al"/>
+					</p>
+				</form>
+			</div>
+
+		</div><!-- end of tabed div -->
+	</div>
+</div>
+
+
+<script src="../assets/global/plugins/jquery-form/jquery.form.js"></script>
+<script>
+
+	$(document).ready(function(){
+
+
+		$("#username").on("keyup", function(){
+			changeSetUsername()
+		})
+	})
+
+	$('#login_form').ajaxForm({
+        beforeSubmit: function (arr) {
+			$("#login-loader").css("display","inline-block")
+
+			let username = $("#username").val()
+			let password = $("#password").val()
+
+			if(username == "" || username == null){
+				$("#alert_content").text("Kullanıcı adı boş geçilemez!")
+				$("#login-loader").css("display","none")
+				return false;
+			}
+			if(password == "" || password == null){
+				$("#alert_content").text("Şifre boş geçilemez!")
+				$("#login-loader").css("display","none")
+				return false;
+			}
+        },
+        beforeSend: function (e) {
+        },
+        complete: function (result) {
+			
+            if (result.responseJSON.isSuccess) {
+				
+				$("#alert_content").css("color", "green").text("Giriş Başarılı")
+				$("#login-loader").css("display","none")
+				//window.location.href = "/"
+            }else{
+				$("#login-loader").css("display","none")
+				$("#alert_content").text(result.responseJSON.message)
+			}
+        },
+    })
+
+	$('#forgot_password_form').ajaxForm({
+        beforeSubmit: function (arr) {
+			$("#login-loader-email").css("display","inline-block")
+
+			let sendEmail = $("#send_email").val()
+
+			if(sendEmail == "" || sendEmail == null){
+				$("#alert_content_email").text("Email adı boş geçilemez!")
+				$("#login-loader-email").css("display","none")
+				return false;
+			}
+			if(sendEmail.search("@") == -1){
+				$("#alert_content_email").text("Geçersiz mail adresi!")
+				$("#login-loader-email").css("display","none")
+				return false;
+			}
+        },
+        beforeSend: function (e) {
+        },
+        complete: function (result) {
+			
+            if (result.responseJSON.isSuccess) {
+				$("#alert_content_email").css("color", "green").text(result.responseJSON.message)
+            }else{
+				$("#alert_content_email").text(result.responseJSON.message)
+			}
+			$("#login-loader-email").css("display","none")
+        },
+    })
+
+	function changeSetUsername() {
+
+		let usernameVal = $("#username").val();
+		let charList = {
+			'çÇ': 'c',
+			'ğĞ': 'g',
+			'şŞ': 's',
+			'üÜ': 'u',
+			'ıİ': 'i',
+			'öÖ': 'o'
+		};
+		for (var key in charList) {
+			usernameVal = usernameVal.replace(new RegExp('[' + key + ']', 'g'), charList[key]);
+		}
+		usernameVal = usernameVal.replace(/[\W]/g, '_');
+		usernameVal = usernameVal.toLowerCase();
+
+		$("#username").val(usernameVal);
+	}
+</script>

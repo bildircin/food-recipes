@@ -12,6 +12,9 @@ router.use(function(req, res, next) {
     next();
 });
 
+router.get("/giris", authController.signin)
+router.post("/signinAjax", authController.signinAjax);
+
 router.post('/uyelik',
     [
         verifySignUp.checkDuplicateUsernameOrEmail,
@@ -20,6 +23,5 @@ router.post('/uyelik',
     authController.signup
 )
 
-router.post("/signin", authController.signin);
 
 export default router;

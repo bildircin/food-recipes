@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="tr-TR">
+<head>
+
+    <%-include('./partials/head')%>
+
+    <%- style %>
+
+</head>
+
+<body>
+
+    <!-- ============= HEADER STARTS HERE ============== -->
+    <div id="header-wrapper" class="clearfix">
+        <div id="header" class="clearfix">
+            <!-- WEBSITE LOGO -->
+            <a class="responsive_logo" href="index.html"><img src="images/logo.png" alt="" class="logo"/></a>
+            <a href="index.html"><h1 class="sitenametext">Food Recipes</h1></a>
+            <img class="header-img" src="images/header-image.png" alt="Food Recipes"/>
+
+            <div class="header-user-nav">
+				<ul>
+                    <%_ if (user) { _%>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-user"></i> &nbsp;
+                                <%= user.userName %></a>
+                            <ul>
+                                <li><a href="/">Profilim</a></li>
+                                <li><a href="/">Yeni Tarif Ver</a></li>
+                                <li><a href="/">Tariflerim</a></li>
+                                <li><a href="/">Çıkış Yap</a></li>
+                            </ul>
+                        </li>
+                    <%_ }else{ _%>
+                        <li>
+                            <a href="/giris">
+                                <i class="fa fa-sign-out"></i> &nbsp;
+                                Giriş Yap</a>
+                        </li>
+                    <%_ } _%>
+                </ul>
+			</div>
+        </div>
+        <!-- end of header div -->
+
+        <span class="w-pet-border"></span>
+
+        <!-- NAVIGATION BAR STARTS HERE -->
+        <div id="nav-wrap">
+            <div class="inn-nav clearfix">
+
+                <!-- MAIN NAVIGATION STARTS HERE -->
+                <ul id="menu-main-navigation" class="nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Slider</a>
+                        <ul class="sub-menu">
+                            <li><a href="basic-slider.html">Basic Slider</a></li>
+                            <li><a href="nivo-slider.html">Nivo Slider</a></li>
+                            <li><a href="thumbnail-slider.html">Thumbnail Slider</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="recipes-listing.html">Recipe listing</a>
+                        <ul class="sub-menu">
+                            <li><a href="recipe-single-1.html">Recipe Single one</a></li>
+                            <li><a href="recipe-single-2.html">Recipe Single two</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="blog.html">Blog</a>
+                        <ul class="sub-menu">
+                            <li> <a href="single.html">Blog Single</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="about-us.html">About</a></li>
+
+                    <li>
+                        <a href="chef-listing.html">Chef Listing</a>
+                        <ul class="sub-menu">
+                            <li><a href="author.html">Chef Single</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li>
+                        <a href="features.html">Features</a>
+                        <ul class="sub-menu">
+                            <li><a href="author.html">Author</a></li>
+                            <li><a href="typography.html">Typography</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a href="advance-search.html">Advance Search</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="http://themeforest.net/item/food-recipes-food-website-and-blog-template/1575003?ref=InspiryThemes">Buy Template</a>
+                    </li>
+                </ul>
+                <!-- MAIN NAVIGATION ENDS HERE -->
+
+
+                <!-- SOCIAL NAVIGATION -->
+                <ul id="menu-social-menu" class="social-nav">
+                    <li class="facebook"><a href="#"></a></li>
+                    <li class="twitter"><a href="#"></a></li>
+                    <li class="rss"><a href="#"></a></li>
+                    <li class="flickr"><a href="#"></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- end of nav-wrap -->
+        <!-- NAVIGATION BAR ENDS HERE -->
+
+    </div>
+    <!-- end of header-wrapper div -->
+
+    <!-- ============= HEADER ENDS HERE ============== -->
+
+
+    <!-- ============= CONTAINER STARTS HERE ============== -->
+    <div class="main-wrap">
+        
+
+
+
+        <%- body %> 
+        
+        
+        
+        
+        
+        
+        <!-- end of container div -->
+    </div>
+    <div class="w-pet-border"></div>
+    <!-- ============= CONTAINER AREA ENDS HERE ============== -->
+
+
+    <!-- ============= BOTTOM AREA STARTS HERE ============== -->
+    <div id="bottom-wrap">
+        <ul id="bottom" class="clearfix">
+
+            <li class="about">
+                <a href="about-us.html"><img  src="images/footer-logo.png" alt="Food Recipes" class="footer-logo"/></a>
+                <p>Donec sollicitudin molestie malesuada. Proin eget tortor risus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. ...</p>
+                <a href="about-us.html" class="readmore">Read more About Us</a>
+            </li>
+
+            <li id="recent_recipe_footer_widget-3" class="Recent_Recipe_Footer_Widget">
+                <h2 class="w-bot-border"> <span>Recent</span> Recipes</h2>
+                <ul class="recent-posts nostylewt">
+                    <li class="clearfix">
+                        <a href="recipe-single-1.html" class="img-box">
+                            <img src="images/demo/7a0a46455c4ec56a5a02c097374fc513-63x53.jpg" class="attachment-most-rated-thumb wp-post-image" alt="7a0a46455c4ec56a5a02c097374fc513"/>
+                        </a>
+                        <h5> <a href="recipe-single-1.html">Chocolate Earl Grey Pots de...</a></h5>
+                        <p>2 cups cream 120 grams dark chocolate, chopped 2 bags...</p>
+                    </li>
+                    <li class="clearfix">
+                        <a href="recipe-single-1.html" class="img-box">
+                            <img  src="images/demo/Pesto-Pizza-with-Roasted-Garlic-Potato2-63x53.jpg" class="attachment-most-rated-thumb wp-post-image" alt="Pesto-Pizza-with-Roasted-Garlic-Potato2"/>
+                        </a>
+                        <h5> <a href="recipe-single-1.html">Pesto Pizza With Roasted Garlic...</a></h5>
+                        <p>Mention potatoes on pizza and you’ll get one of two...</p>
+                    </li>
+                </ul>
+            </li>
+            <li id="displaytweetswidget-3" class="widget_displaytweetswidget">
+                <h2>Inspiry Themes</h2>
+                <p>Check out 'Cream - Sweets and Bakers WordPress Theme' on
+                    <a href="http://www.twitter.com/EnvatoMarket" target="_blank">@EnvatoMarket</a> by
+                    <a href="http://www.twitter.com/InspiryThemes" target="_blank">@InspiryThemes</a>
+                    <a href="http://twitter.com/search?q=%23themeforest&src=hash" target="_blank">#themeforest</a>
+                    <a href="http://t.co/we8M81zKf0" target="_blank">http://t.co/we8M81zKf0</a><br/>
+                    <small class="muted">- Thursday Nov 6 - 7:25am</small>
+                </p>
+                <p>Data Sanitization and Validation With WordPress <a href="http://t.co/AJJoOERrwp" target="_blank">http://t.co/AJJoOERrwp</a> via
+                    <a href="http://www.twitter.com/tutsplus" target="_blank">@tutsplus</a><br/>
+                    <small class="muted">- Sunday Nov 2 - 8:02am</small>
+                </p>
+            </li>
+
+        </ul>
+        <!-- end of bottom div -->
+    </div>
+    <!-- end of bottom-wrap div -->
+    <!-- ============= BOTTOM AREA ENDS HERE ============== -->
+
+
+    <!-- ============= FOOTER STARTS HERE ============== -->
+
+    <div id="footer-wrap">
+        <div id="footer">
+            <p class="copyright">Copyright &copy; 2016, Food Recipes - A Premium HTML Template</p>
+            <p class="dnd">Developed by <a href="http://themeforest.net/user/inspirythemes">Inspiry Themes</a></p>
+        </div>
+        <!-- end of footer div -->
+    </div>
+    <!-- end of footer-wrapper div -->
+
+    <!-- ============= FOOTER STARTS HERE ============== -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    <!-- <script type='text/javascript' src='js/jquery.js'></script> -->
+    <script type='text/javascript' src='js/jquery-migrate.min.js?ver=1.2.1'></script>
+    <script type='text/javascript' src='js/jquery.validate.min.js?ver=1.11.1'></script>
+    <script type='text/javascript' src='js/jquery.form.min.js?ver=3.48.0'></script>
+    <script type='text/javascript' src='js/jquery.easing.1.3.js?ver=1.3'></script>
+    <script type='text/javascript' src='js/prettyPhoto/js/jquery.prettyPhoto.js?ver=3.1.3'></script>
+    <!-- <script type='text/javascript' src='js/jquery.cycle2.js?ver=2.0130909'></script> -->
+    <script type='text/javascript' src='js/nivo-slider/jquery.nivo.slider.js?ver=2.7.1'></script>
+    <script type='text/javascript' src='js/accordion-slider.js?ver=1.0'></script>
+    <script type='text/javascript' src='js/jquery-ui.min.js?ver=1.10.2'></script>
+    <script type='text/javascript' src='js/select2.full.min.js?ver=4.0'></script>
+    <script type='text/javascript' src='js/script.js?ver=1.0'></script>
+
+
+    <%- script %>
+
+</body>
+</html>

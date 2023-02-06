@@ -5,7 +5,7 @@ import { Op, QueryTypes } from "sequelize"
 import db from "../../db.js";
 
 const verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
+  let token = req.cookies["usr-auth"];
 
   if (!token) {
     return res.status(403).send({

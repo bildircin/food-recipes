@@ -6,6 +6,8 @@ import session from 'express-session'
 import flash from 'connect-flash'
 import fileUpload from 'express-fileupload'
 import db from './db.js'
+import config from './app/config/auth.config.js'
+import jwt from "jsonwebtoken";
 
 const app = express()
 app.use(session({
@@ -23,7 +25,7 @@ app.use(express.static('public'))
 app.use(express.static('public_admin'))
 app.use(cookieParser())
 app.set('view engine', 'ejs')
-app.set('layout', './layouts/layout')
+app.set('layout', './UI/layout')
 app.set("layout extractScripts", true)
 app.set("layout extractStyles", true)
 //app.use(passport.initialize())
@@ -31,6 +33,22 @@ app.set("layout extractStyles", true)
 app.use(flash())
 app.use(fileUpload());
 
+
+app.use((req,res, next)=>{
+    
+    app.locals.user = null
+    
+    let token = req.cookies["usr-auth"];
+    if (token) {
+        jwt.verify(token, config.secret, (err, decoded) => {
+            if (err) {
+              app.locals.user = null
+            }
+            app.locals.user = decoded.user ? decoded.user : null;
+        });
+    }
+    next()
+})
 
 import authRoutes from './app/routes/AuthRoutes.js'
 import userRoutes from './app/routes/UserRoutes.js'
@@ -43,8 +61,9 @@ app.use(userRoutes)
 
 
 
+
 app.get('*', (req,res)=>{
-    res.render('404')
+    res.render('UI/404')
 })
 
 app.listen(port, ()=>{

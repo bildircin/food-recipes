@@ -3,7 +3,7 @@ import config from "../config/auth.config.js"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 import User from "../models/User.js"
-import Role from "../models/Role.js"
+import UserRole from "../models/UserRole.js"
 import db from "../../db.js"
 import moment from "moment/moment.js"
 
@@ -49,7 +49,7 @@ const signup = async (req, res) => {
     });
 };
 
-const signin = async (req, res) => {
+const signinAjax = async (req, res) => {
   await User.findOne({
     where: {
         userName: req.body.userName
@@ -73,11 +73,16 @@ const signin = async (req, res) => {
         });
       }
 
-      let getToken = req.headers["x-access-token"];
+      let getToken = req.cookies["usr-auth"];
       let token = getToken;
 
       if(!getToken){
-          token = jwt.sign({ id: user.id }, config.secret, {
+          token = jwt.sign({user:{
+            id:user.id,
+            userName: user.userName,
+            firstName: user.firstName,
+            surName: user.surName
+          }}, config.secret, {
             expiresIn: 86400 // 24 hours
           });
       }
@@ -89,8 +94,9 @@ const signin = async (req, res) => {
         for (let i = 0; i < roles.length; i++) {
             authorities.push("ROLE_" + item.name.toUpperCase());
           }
-          res.set("x-access-token", token)
+          res.cookie("usr-auth", token)
           res.status(200).send({
+            isSuccess: true,
             id: user.id,
             userName: user.userName,
             email: user.email,
@@ -105,7 +111,12 @@ const signin = async (req, res) => {
     });
 };
 
+const signin = async (req,res) => {
+  res.status(200).render("UI/login")
+}
+
 export default {
   signin,
+  signinAjax,
   signup
 }
