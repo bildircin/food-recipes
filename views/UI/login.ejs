@@ -37,7 +37,7 @@
 
 			
 			<div class="block">
-				<form action="/sifre-yenileme" id="forgot_password_form" method="post">
+				<form action="/sifre-yenileme-talep" id="forgot_password_form" method="post">
 					<p style="margin-bottom: 10px;">
 						<label for="send_email" class="forgot-email">Email</label>
 						<input type="text" name="sendEmail" value="" id="send_email"/>
@@ -105,7 +105,7 @@
 	$('#forgot_password_form').ajaxForm({
         beforeSubmit: function (arr) {
 			$("#login-loader-email").css("display","inline-block")
-
+            $("#alert_content_email").text("")
 			let sendEmail = $("#send_email").val()
 
 			if(sendEmail == "" || sendEmail == null){

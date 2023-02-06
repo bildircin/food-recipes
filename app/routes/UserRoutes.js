@@ -13,7 +13,8 @@ router.use(function(req, res, next) {
 
 router.get("/", userController.home)
 
-router.post("/sifre-yenileme", userController.passwordReset)
+router.post("/sifre-yenileme-talep", userController.passwordReset)
+//router.post("/sifre-yenileme/:uuid?", userController)
 
 
 

@@ -3,15 +3,15 @@ import { v4 as uuidv4 } from 'uuid';
 import User from "../models/User.js";
 import moment from "moment";
 import nodemailer from "nodemailer";
+import smtpTransport from "nodemailer-smtp-transport" ;
 
 const home = (req,res)=>{
-    
     return res.status(200).render('UI/home')
 }
 
-const passwordReset = (req,res)=>{
+const passwordReset = async (req,res)=>{
     
-    /* const sendEmail = req.body.sendEmail;
+    const sendEmail = req.body.sendEmail;
 
     User.findOne({
         where:{
@@ -22,15 +22,47 @@ const passwordReset = (req,res)=>{
         if(user){
 
             const uuid = uuidv4();
-            PasswordReset.create({
-                email: sendEmail,
-                uuid:uuid,
-                createDate: moment()
-            }).then(reset => {
-                
-                
-                
-            }).catch(err => {
+
+            PasswordReset.destroy({
+                where:{
+                    email:sendEmail
+                }
+            }).then(item=>{
+
+                PasswordReset.create({
+                    email: sendEmail,
+                    uuid:uuid,
+                    createdDate: moment()
+                }).then(async reset => {
+                    
+                    let mailTransporter = nodemailer.createTransport(smtpTransport({
+                        service: 'gmail',
+                        host: 'smtp.gmail.com',
+                        auth: {
+                            user: 'bildircina34@gmail.com',
+                            pass: 'wpwzxfanplvfmmni'
+                        }
+                    }))
+    
+                    let info = mailTransporter.sendMail({
+                        from: '"Enfesto.net" <bildircina34@gmail.com>',
+                        to: sendEmail,
+                        subject: "Sayın " + user.firstName,
+                        text: "Şifre Yenileme Talebi",
+                        html: "<p>Şifrenizi sıfırlamak için aşağıdaki bağlantıya tıklayınız.</p><br /><a href='https://localhost:3000/sifre-yenileme/" + uuid + "'> https://localhost:3000/sifre-yenileme/" + uuid + " </a>",
+                      }, function(err, data) {
+                        if(err) {
+                            console.log(err);
+                            res.status(500).send({isSuccess: false, message: err.code && err.code == "EENVELOPE" ? "Mail adresiniz geçersiz" : ( err.code ? err.code : "Mail gönderilemedi sayfayı yenileyip tekrar deneyiniz")})
+                        } else {
+                            res.status(200).send({isSuccess: true, message: "Mail Adresinize Yenileme Linki Başarıyla Gönderildi"})
+                        }
+                    })
+                    
+                }).catch(err => {
+                    res.status(500).send({isSuccess: false, message: err})
+                })
+            }).catch(err=>{
                 res.status(500).send({isSuccess: false, message: err})
             })
         }else{
@@ -38,52 +70,9 @@ const passwordReset = (req,res)=>{
         }
     }).catch(err =>{
         res.status(500).send({isSuccess: false, message: err})
-    }) */
-
-
-    
-    
-    
-   
+    })
 }
 
-main().catch(console.error);
-
-async function main(){
-    let testAccount = await nodemailer.createTestAccount();
-
-    // create reusable transporter object using the default SMTP transport
-    let mailTransporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        requireTLS: true,
-        auth: {
-            user: 'bildircina34@gmail.com',
-            pass: ''
-        }
-    });
-
-    let info = await mailTransporter.sendMail({
-        from: '"Fred Foo 👻" <bildircina34@gmail.com>', // sender address
-        to: "rahmanbildircin@gmail.com", // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
-      });
-
-      mailTransporter.sendMail(mailDetails, function(err, data) {
-        if(err) {
-            console.log('Error Occurs');
-        } else {
-            console.log('Email sent successfully');
-        }
-    });
-
-    /*   console.log("Message sent: %s", info.messageId);
-
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info)); */
-}
 
 
 const allAccess = async (req,res)=>{
