@@ -133,7 +133,7 @@ jQuery(document).ready(function() {
 
     // Navigation Hover
 
-    $('#nav-wrap ul > li, .nav-more').hover(function(){
+    $('#nav-wrap ul > li.social-nav, .nav-more').hover(function(){
         $(this).stop(true, true).children('a').animate({color: "#B3C897" }, 200);
         $(this).children('ul').fadeIn(350);
     }, function(){

@@ -19,17 +19,6 @@ router.post("/sifre-yenileme-talep", userController.passwordReset)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 router.get("/api/test/all", userController.allAccess);
 
 router.get(

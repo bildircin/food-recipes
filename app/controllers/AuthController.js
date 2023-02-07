@@ -6,6 +6,7 @@ import User from "../models/User.js"
 import UserRole from "../models/UserRole.js"
 import db from "../../db.js"
 import moment from "moment/moment.js"
+import app from "../../app.js"
 
 const signup = async (req, res) => {
   // Save User to Database
@@ -29,7 +30,7 @@ const signup = async (req, res) => {
     })
     .then(user => {
         // user role = 1
-
+        
         UserRole.create({
             roleId: 1,
             userId: user.id,
@@ -89,14 +90,15 @@ const signinAjax = async (req, res) => {
 
       var authorities = [];
       const roles = await db.query("SELECT * FROM user_roles inner join roles on user_roles.userId = roles.id WHERE user_roles.userId = " + user.id, { type: QueryTypes.SELECT });
-    
+      
+      for (let i = 0; i < roles.length; i++) {
+          authorities.push(roles[i].name.toUpperCase());
+        }
       roles.forEach(item => {
-        for (let i = 0; i < roles.length; i++) {
-            authorities.push("ROLE_" + item.name.toUpperCase());
-          }
           res.cookie("usr-auth", token)
           res.status(200).send({
             isSuccess: true,
+            message: "Giriş Başarılı",
             id: user.id,
             userName: user.userName,
             email: user.email,
@@ -111,6 +113,12 @@ const signinAjax = async (req, res) => {
     });
 };
 
+const logout = async (req,res) => {
+    app.locals.user = null;
+    res.clearCookie("usr-auth")
+    res.redirect("/")
+}
+
 const signin = async (req,res) => {
   res.status(200).render("UI/login")
 }
@@ -118,5 +126,6 @@ const signin = async (req,res) => {
 export default {
   signin,
   signinAjax,
+  logout,
   signup
 }

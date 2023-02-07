@@ -14,6 +14,7 @@ router.use(function(req, res, next) {
 
 router.get("/giris", authController.signin)
 router.post("/signinAjax", authController.signinAjax);
+router.get("/cikis", authController.logout);
 
 router.post('/uyelik',
     [

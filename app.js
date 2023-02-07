@@ -46,7 +46,7 @@ app.use((req,res, next)=>{
             }
             console.log('decoded')
             console.log(decoded)
-            //app.locals.user = decoded.hasOwnProperty("user") ? decoded.user : null;
+            app.locals.user = decoded.hasOwnProperty("user") ? decoded.user : null;
         });
     }
     next()
@@ -54,9 +54,11 @@ app.use((req,res, next)=>{
 
 import authRoutes from './app/routes/AuthRoutes.js'
 import userRoutes from './app/routes/UserRoutes.js'
+import recipeRoutes from './app/routes/RecipeRoutes.js'
 
 app.use(authRoutes)
 app.use(userRoutes)
+app.use(recipeRoutes)
 
 
 
@@ -73,3 +75,4 @@ app.listen(port, ()=>{
 })
 
 
+export default app;

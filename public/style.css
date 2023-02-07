@@ -142,7 +142,7 @@ a:hover {
 }
 
 .fireRed {
-    color: #63991b;
+    color: #bf0f1a;
 }
 
 .w-pet-border {
@@ -557,6 +557,66 @@ img{
     left: auto;
 }
 
+/* .user-nav{
+    float: right;
+    box-sizing: content-box;
+    text-align: center;
+}
+
+.user-nav li{
+    margin: 0 0 0 9px;
+}
+
+.user-nav a{
+    width: 23px;
+    height: 23px;
+    background: #73020A;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 9px;
+}
+ */
+
+ 
+.user-nav-content{
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 23px;
+    width: 200px;
+    height: 100%;
+}
+
+#nav-wrap .social-nav .user:hover  .user-nav-content{
+    display: block;
+}
+
+.user-nav-menu {
+    background-color: #f7f7f7;
+    position: absolute;
+    right: 0;
+    top: 9px;
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 22%);
+}
+
+.user-nav-menu li a {
+    padding: 10px 5px;
+    display: block;
+    border-bottom: 1px solid #ccc;
+    width: 80%;
+    margin: auto;
+}
+.user-nav-menu li:last-child a {
+    border-bottom: none;
+}
+.user-nav-menu li:hover a {
+    background-color: #bf0f1ad6;
+    color: white;
+}
+
 #nav-wrap .social-nav {
     padding: 10px 0;
     float: right;
@@ -564,14 +624,14 @@ img{
     text-align: center;
 }
 
-#nav-wrap .social-nav li {
+#nav-wrap .social-nav > li {
     margin: 0 0 0 9px;
     position: relative;
     width: 23px;
     height: 23px;
     float: left;
 }
-#nav-wrap .social-nav li a {
+#nav-wrap .social-nav > li > a {
     width: 23px;
     height: 23px;
     position: absolute;
@@ -588,10 +648,10 @@ img{
     -ms-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
-#nav-wrap .social-nav li a:hover{
+#nav-wrap .social-nav > li:not(.user) a:hover{
     background: #fff;
 }
-#nav-wrap .social-nav li a:before{
+#nav-wrap .social-nav > li a:before{
     display: inline-block;
     color: #bf0f1a;
     font: normal normal normal 14px/1 FontAwesome;
@@ -602,6 +662,12 @@ img{
     -moz-osx-font-smoothing: grayscale;
     transform: translate(0, 0);
     padding: 5px;
+}
+#nav-wrap .social-nav .login > a:before {
+    content: "Giriş Yap";
+}
+#nav-wrap .social-nav .user > a:before {
+    content: "\f007";
 }
 #nav-wrap .social-nav .facebook a:before {
     content: "\f09a";
@@ -835,7 +901,7 @@ img{
 }
 
 #slider .slider-head span {
-    color: #689d1a;
+    color: #bf0f1a;
 }
 
 #slider .slogan {
@@ -4789,6 +4855,7 @@ img{
 
 #recipe-form input[type="text"] {
     padding: 5px;
+    width: 100%;
 }
 
 #recipe-form fieldset {
@@ -4816,7 +4883,7 @@ img{
     width: 400px;
 }
 
-#recipe-form fieldset .more-ingre {
+#recipe-form fieldset .more-ingre-custom {
     font-size: 35px;
     position: absolute;
     right: 0;
@@ -4833,7 +4900,7 @@ img{
 }
 
 #recipe-form #short-description {
-    width: 96%;
+    width: 100%;
 }
 
 .logout_link {
@@ -5036,6 +5103,11 @@ html #wpadminbar {
 #header .header-user-nav li .fa-sign-out:before{
     content: "\f08b" !important;
 }
+
+.steps-wrap textarea{
+    width: 100%;
+}
+
 
 
 /*-----------------------------------------------------------------------------------*/

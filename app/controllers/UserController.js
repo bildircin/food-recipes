@@ -31,7 +31,7 @@ const passwordReset = async (req,res)=>{
 
                 PasswordReset.create({
                     email: sendEmail,
-                    uuid:uuid,
+                    uuid: uuid,
                     createdDate: moment()
                 }).then(async reset => {
                     
@@ -47,9 +47,9 @@ const passwordReset = async (req,res)=>{
                     let info = mailTransporter.sendMail({
                         from: '"Enfesto.net" <bildircina34@gmail.com>',
                         to: sendEmail,
-                        subject: "Sayın " + user.firstName,
+                        subject: "Sayın ",
                         text: "Şifre Yenileme Talebi",
-                        html: "<p>Şifrenizi sıfırlamak için aşağıdaki bağlantıya tıklayınız.</p><br /><a href='https://localhost:3000/sifre-yenileme/" + uuid + "'> https://localhost:3000/sifre-yenileme/" + uuid + " </a>",
+                        html: "<p>Sayın " + user.firstName + ", <br /> Şifrenizi sıfırlamak için aşağıdaki bağlantıya tıklayınız.</p><br /><a href='https://localhost:3000/sifre-yenileme/" + uuid + "'> https://localhost:3000/sifre-yenileme/" + uuid + " </a>",
                       }, function(err, data) {
                         if(err) {
                             console.log(err);

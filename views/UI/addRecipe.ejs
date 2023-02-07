@@ -1,0 +1,249 @@
+
+
+<style>
+    #video-based-content {
+        width: 200px;
+    }
+    .select2-selection__rendered {
+        line-height: 31px !important;
+        font-size: 14px !important;
+    }
+    .select2-container .select2-selection--single {
+        height: 38px !important;
+    }
+    .select2-selection__arrow {
+        height: 36px !important;
+    }
+    
+</style>
+
+<div id="container" class="container">
+
+    <!-- WEBSITE SEARCH STARTS HERE -->
+
+    <div class="top-search  clearfix">
+        <h3 class="head-pet"><span>Recipe Search</span></h3>
+
+        <form action="#" id="searchform">
+            <p>
+                <input type="text" name="s" id="s" class="field" value="" placeholder="Search for"/>
+                <input type="submit" name="s_submit" id="s-submit" value=""/>
+            </p>
+        </form>
+
+        <p class="statement"><span class="fireRed">Recipe Types:</span>
+            <a href="#">Beef</a> , <a href="#">Cheese</a> , <a href="#">Chicken</a> , <a href="#">Chocolate</a> , <a href="#">Fish</a> , <a href="#">Pizzas</a>, <a href="#">Potatos</a>, <a href="#">Rolls</a>
+        </p>
+
+    </div>
+    <!-- end of top-search div-->
+
+    <!-- ============= CONTENT AREA STARTS HERE ============== -->
+    <div id="content" class="clearfix ">
+        <div class="row recipe-listing-row">
+            <div id="left-area" class="clearfix col-md-12 full-wide">
+                <div class="post-366 page type-page status-publish hentry clearfix" id="page-366">
+                    <h1 class="post-title">Tarif Ekle</h1>
+                </div><!-- end of post div -->
+
+
+                <form id="recipe-form" name="recipe-form" action="#" method="post" enctype="multipart/form-data">
+
+                    <!-- recipe title -->
+                    <fieldset name="recipe-title" class="recipe-title">
+                        <label for="inspiry_recipe_title">Tarif Başlığı</label>
+                        <input type="text" id="inspiry_recipe_title" value="" tabindex="15" name="inspiry_recipe_title"
+                            data-msg-required="Please enter recipe title"
+                            data-rule-required="true" aria-required="true"/>
+                    </fieldset>
+
+                    <!-- recipe excerpt -->
+                    <fieldset class="content">
+                        <label for="short-description">Kısa Açıklama</label>
+                        <textarea id="short-description" tabindex="16" name="short-description"
+                                data-msg-required="Please enter some short description"
+                                data-rule-required="true" aria-required="true" cols="80" rows="3"
+                                class="tinymce-enabled"></textarea>
+                    </fieldset>
+
+                    <!-- recipe content -->
+                    <fieldset class="content">
+                        <label for="description">Tarif İçeriği</label>
+                        <div id="wp-description-wrap" class="wp-core-ui wp-editor-wrap tmce-active"><link rel='stylesheet' id='editor-buttons-css' href='https://foodrecipes.inspirythemes.com/bootstrap/wp-includes/css/editor.min.css?ver=6.1.1' type='text/css' media='all' />
+        <div id="wp-description-editor-tools" class="wp-editor-tools hide-if-no-js"><div class="wp-editor-tabs"><button type="button" id="description-tmce" class="wp-switch-editor switch-tmce" data-wp-editor-id="description">Visual</button>
+        <button type="button" id="description-html" class="wp-switch-editor switch-html" data-wp-editor-id="description">Text</button>
+        </div>
+        </div>
+        <div id="wp-description-editor-container" class="wp-editor-container"><div id="qt_description_toolbar" class="quicktags-toolbar hide-if-no-js"></div><textarea class="wp-editor-area" rows="20" tabindex="17" autocomplete="off" cols="40" name="description" id="description"></textarea></div>
+        </div>
+
+                    </fieldset>
+                    <!-- recipe featured image -->
+                    <fieldset class="recipe-image">
+                        <label>Tarif Resimleri</label>
+                        <span class="note"><strong>* Resim boyutunun genişliği 575 pikselden ve yüksekliği 262 pikselden fazla olmalıdır.</strong></span>
+                        <span class="note"><strong>* Yıldız simgesine tıklayarak bir görseli öne çıkan olarak işaretleyebilirsiniz, aksi takdirde ilk görsel öne çıkan görsel olarak kabul edilecektir.</strong></span>
+
+                        <div id="gallery-thumbs-container" class="clearfix"></div>
+                    <div id="drag-and-drop">
+                        <div class="drag-drop-msg text-center">&nbsp;
+                            Drag and drop images here                        <br/>
+                            <span class="drag-or">OR</span>
+                            <br/>
+                            <a id="select-images" class="drag-btn readmore" href="javascript:;">
+                                Resimler Seç                       </a>
+                        </div>
+                    </div>
+                    <div id="plupload-container"></div>
+                    <div id="errors-log"></div>
+                    </fieldset>
+
+                    <fieldset class="incobjs ingre-wrap">
+                        <label>İçindekiler</label>
+                        <input type="text" name="ingredient[]" class="entry-element" size="50">
+                        <span class="more-ingre-custom">+</span>
+                        <span class="note">Yeni malzeme eklemek için sağdaki + düğmesini kullanın.</span>
+                    </fieldset>
+                    <fieldset class="incobjs steps-wrap">
+                        <label>Adımlar</label>
+                        <textarea name="recipe_step[]" class="entry-element" cols="60" rows="3"></textarea>
+                        <span class="more-ingre-custom">+</span>
+                        <span class="note">Yeni adım eklemek için sağdaki + düğmesini kullanın.</span>
+                    </fieldset>
+                    <fieldset>
+                        <label>Video Tabanlı Tarif</label>
+                        <div id="video-based-content">
+                            <select id="video-based" name="video_based_recipe">
+                                <option value="on">Evet</option>
+                                <option value="off"
+                                        selected>Hayır</option>
+                            </select>
+                        </div>
+                        <span class="note">Video Tabanlı bir tarif, ekli resimleri göstermez ve yalnızca en üstte bir video görüntüler.</span>
+                    </fieldset>
+                    <fieldset>
+                        <label for="video-embed-code">Video Embed Code</label>
+                        <textarea name="video_embed_code" id="video-embed-code" cols="60" rows="3"></textarea><br>
+                        <span class="note">* Video yerleştirme kodunu sağlayın ve genişlik özniteliğini 575 piksel ve yükseklik özniteliğini 262 piksel olarak değiştirin.</span>
+                    </fieldset>
+                    <!-- recipe detail -->
+                    <fieldset name="recipe-detail" class="recipe-detail">
+
+                        <div>
+                            <label for="yield">Yield</label>
+                            <input type="text" id="yield" value="" tabindex="19" name="yield"/>
+
+                            <label for="servings">Porsiyon</label>
+                            <input type="text" id="servings" value="" tabindex="20" name="servings"/>
+                        </div>
+
+                        <div>
+                            <span class="note">* Specify the time in minutes and value greater than 60 will be automatically displayed in hours.</span>
+                            <label for="prep-time">Prep Time</label>
+                            <input type="text" id="prep-time" value="" tabindex="21" name="prep-time"/>
+
+
+                            <label for="cook-time">Cook Time</label>
+                            <input type="text" id="cook-time" value="" tabindex="22" name="cook-time"/>
+
+                            <label for="ready-in">Ready In</label>
+                            <input type="text" id="ready-in" value="" tabindex="23" name="ready-in"/>
+                        </div>
+
+                    </fieldset>
+
+                    <!-- recipe categories -->
+                    <fieldset name="recipe-categories" class="recipe-categories clearfix">
+
+                        <div class="clearfix">
+                            <label for="tags"
+                                class="for-tags">Tags</label>
+                            <input type="text" id="tags" value="" tabindex="24" name="tags"/> <br>
+                            <span class="note">* Tags keywords should all be in lowercase and separated by commas</span>
+                        </div>
+
+                        <div class="clearfix">
+                            <label for="recipe-type">Recipe Type</label>
+                            <select  name='recipe-type' id='recipe-type' class='postform' tabindex="25">
+        <option value='-1'>None</option>
+        <option class="level-0" value="84">Beef</option>
+        <option class="level-0" value="89">Cheese</option>
+        <option class="level-0" value="91">Chicken</option>
+        <option class="level-0" value="94">Chocolate</option>
+        <option class="level-0" value="99">Fish</option>
+        <option class="level-0" value="108">Pizzas</option>
+        <option class="level-0" value="110">Potatos</option>
+        <option class="level-0" value="111">Rolls</option>
+        </select>
+                        </div>
+
+                        <div class="clearfix">
+                            <label for="cuisine">Cuisine</label>
+                            <select  name='cuisine' id='cuisine' class='postform' tabindex="26">
+        <option value='-1'>None</option>
+        <option class="level-0" value="82">American</option>
+        <option class="level-0" value="93">Chinese</option>
+        <option class="level-0" value="97">English</option>
+        <option class="level-0" value="101">German</option>
+        <option class="level-0" value="102">Indian</option>
+        </select>
+                        </div>
+
+                        <div class="clearfix">
+                            <label for="course">Course</label>
+                            <select  name='course' id='course' class='postform' tabindex="27">
+        <option value='-1'>None</option>
+        <option class="level-0" value="83">Appetizer</option>
+        <option class="level-0" value="113">Side Dish</option>
+        <option class="level-0" value="114">Snack</option>
+        </select>
+                        </div>
+
+                        <div class="clearfix">
+                            <label for="skill-level">Skill Level</label>
+                            <select  name='skill-level' id='skill-level' class='postform' tabindex="28">
+        <option value='-1'>None</option>
+        <option class="level-0" value="81">Advanced</option>
+        <option class="level-0" value="85">Beginner</option>
+        <option class="level-0" value="92">Child Friendly</option>
+        <option class="level-0" value="96">Easy</option>
+        <option class="level-0" value="98">Expert</option>
+        <option class="level-0" value="103">Intermediate</option>
+        <option class="level-0" value="105">Moderate</option>
+        </select>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="submit">
+                        <input type="submit"
+                            value="Submit Recipe"
+                            tabindex="40" id="submit" name="submit" class="readmore"/>
+                    </fieldset>
+
+                    <input type="hidden" name="action" value="submit-recipe"/>
+                    <input type="hidden" id="_wpnonce" name="_wpnonce" value="1a186900ed" /><input type="hidden" name="_wp_http_referer" value="/bootstrap/submit-recipe/" />
+                </form>
+                        </div><!-- end of left-area -->
+            <!-- LEFT AREA ENDS HERE -->
+            </div>
+        </div><!-- end of content div -->
+                <!-- CONTENT ENDS HERE -->
+
+    </div><!-- end of container div -->
+
+
+<script>
+    $(document).ready(function(){
+
+        $("#video-based").select2({
+            width: "100%",
+            height: "46px"
+        })
+        
+        $(".more-ingre-custom").on("click", function(){
+            let entryElement = $(this).siblings(".entry-element").first()
+            entryElement.after(entryElement.clone())
+        })
+    })
+</script>
