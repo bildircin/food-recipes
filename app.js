@@ -44,7 +44,9 @@ app.use((req,res, next)=>{
             if (err) {
               app.locals.user = null
             }
-            app.locals.user = decoded.user ? decoded.user : null;
+            console.log('decoded')
+            console.log(decoded)
+            //app.locals.user = decoded.hasOwnProperty("user") ? decoded.user : null;
         });
     }
     next()
