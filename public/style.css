@@ -5104,7 +5104,8 @@ html #wpadminbar {
     content: "\f08b" !important;
 }
 
-.steps-wrap textarea{
+.steps-wrap textarea,
+#video-embed-code{
     width: 100%;
 }
 

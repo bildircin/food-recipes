@@ -113,7 +113,7 @@
                     <fieldset>
                         <label>Video Tabanlı Tarif</label>
                         <div id="video-based-content">
-                            <select id="video-based" name="video_based_recipe">
+                            <select id="video_based" name="video_based_recipe">
                                 <option value="on">Evet</option>
                                 <option value="off"
                                         selected>Hayır</option>
@@ -138,15 +138,15 @@
                         </div>
 
                         <div>
-                            <span class="note">* Specify the time in minutes and value greater than 60 will be automatically displayed in hours.</span>
-                            <label for="prep-time">Prep Time</label>
+                            <span class="note">* Süreyi dakika cinsinden belirtin ve 60'tan büyük bir değer otomatik olarak saat cinsinden görüntülenecektir.</span>
+                            <label for="prep-time">Hazırlık Zamanı</label>
                             <input type="text" id="prep-time" value="" tabindex="21" name="prep-time"/>
 
 
-                            <label for="cook-time">Cook Time</label>
+                            <label for="cook-time">Pişirme Süresi</label>
                             <input type="text" id="cook-time" value="" tabindex="22" name="cook-time"/>
 
-                            <label for="ready-in">Ready In</label>
+                            <label for="ready-in">Toplam Hazır Olma Süresi</label>
                             <input type="text" id="ready-in" value="" tabindex="23" name="ready-in"/>
                         </div>
 
@@ -157,60 +157,60 @@
 
                         <div class="clearfix">
                             <label for="tags"
-                                class="for-tags">Tags</label>
+                                class="for-tags">Etiketler</label>
                             <input type="text" id="tags" value="" tabindex="24" name="tags"/> <br>
-                            <span class="note">* Tags keywords should all be in lowercase and separated by commas</span>
+                            <span class="note">* Etiketler anahtar kelimelerinin tümü küçük harfle olmalı ve virgülle ayrılmalıdır.</span>
                         </div>
 
                         <div class="clearfix">
-                            <label for="recipe-type">Recipe Type</label>
-                            <select  name='recipe-type' id='recipe-type' class='postform' tabindex="25">
-        <option value='-1'>None</option>
-        <option class="level-0" value="84">Beef</option>
-        <option class="level-0" value="89">Cheese</option>
-        <option class="level-0" value="91">Chicken</option>
-        <option class="level-0" value="94">Chocolate</option>
-        <option class="level-0" value="99">Fish</option>
-        <option class="level-0" value="108">Pizzas</option>
-        <option class="level-0" value="110">Potatos</option>
-        <option class="level-0" value="111">Rolls</option>
-        </select>
+                            <label for="recipe-type">Tarif Türü</label>
+                            <select  name='recipe-type' id='recipe_type' class='postform' tabindex="25">
+                                <option value='-1'>None</option>
+                                <option class="level-0" value="84">Beef</option>
+                                <option class="level-0" value="89">Cheese</option>
+                                <option class="level-0" value="91">Chicken</option>
+                                <option class="level-0" value="94">Chocolate</option>
+                                <option class="level-0" value="99">Fish</option>
+                                <option class="level-0" value="108">Pizzas</option>
+                                <option class="level-0" value="110">Potatos</option>
+                                <option class="level-0" value="111">Rolls</option>
+                            </select>
                         </div>
 
                         <div class="clearfix">
-                            <label for="cuisine">Cuisine</label>
+                            <label for="cuisine">Mutfak Türü</label>
                             <select  name='cuisine' id='cuisine' class='postform' tabindex="26">
-        <option value='-1'>None</option>
-        <option class="level-0" value="82">American</option>
-        <option class="level-0" value="93">Chinese</option>
-        <option class="level-0" value="97">English</option>
-        <option class="level-0" value="101">German</option>
-        <option class="level-0" value="102">Indian</option>
-        </select>
+                                <option value='-1'>None</option>
+                                <option class="level-0" value="82">American</option>
+                                <option class="level-0" value="93">Chinese</option>
+                                <option class="level-0" value="97">English</option>
+                                <option class="level-0" value="101">German</option>
+                                <option class="level-0" value="102">Indian</option>
+                            </select>
                         </div>
 
                         <div class="clearfix">
-                            <label for="course">Course</label>
+                            <label for="course">Tabak</label>
                             <select  name='course' id='course' class='postform' tabindex="27">
-        <option value='-1'>None</option>
-        <option class="level-0" value="83">Appetizer</option>
-        <option class="level-0" value="113">Side Dish</option>
-        <option class="level-0" value="114">Snack</option>
-        </select>
+                                <option value='-1'>None</option>
+                                <option class="level-0" value="83">Appetizer</option>
+                                <option class="level-0" value="113">Side Dish</option>
+                                <option class="level-0" value="114">Snack</option>
+                            </select>
                         </div>
 
                         <div class="clearfix">
-                            <label for="skill-level">Skill Level</label>
-                            <select  name='skill-level' id='skill-level' class='postform' tabindex="28">
-        <option value='-1'>None</option>
-        <option class="level-0" value="81">Advanced</option>
-        <option class="level-0" value="85">Beginner</option>
-        <option class="level-0" value="92">Child Friendly</option>
-        <option class="level-0" value="96">Easy</option>
-        <option class="level-0" value="98">Expert</option>
-        <option class="level-0" value="103">Intermediate</option>
-        <option class="level-0" value="105">Moderate</option>
-        </select>
+                            <label for="skill-level">Yetenek Seviyesi</label>
+                            <select  name='skill-level' id='skill_level' class='postform' tabindex="28">
+                                <option value='-1'>None</option>
+                                <option class="level-0" value="81">Advanced</option>
+                                <option class="level-0" value="85">Beginner</option>
+                                <option class="level-0" value="92">Child Friendly</option>
+                                <option class="level-0" value="96">Easy</option>
+                                <option class="level-0" value="98">Expert</option>
+                                <option class="level-0" value="103">Intermediate</option>
+                                <option class="level-0" value="105">Moderate</option>
+                            </select>
                         </div>
 
                     </fieldset>
@@ -236,7 +236,7 @@
 <script>
     $(document).ready(function(){
 
-        $("#video-based").select2({
+        $("#video_based,#recipe_type,#cuisine,#course,#skill_level").select2({
             width: "100%",
             height: "46px"
         })

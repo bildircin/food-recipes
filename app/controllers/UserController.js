@@ -1,9 +1,11 @@
+import { Op, QueryTypes } from "sequelize"
 import PasswordReset from "../models/PasswordReset.js";
 import { v4 as uuidv4 } from 'uuid';
 import User from "../models/User.js";
 import moment from "moment";
 import nodemailer from "nodemailer";
 import smtpTransport from "nodemailer-smtp-transport" ;
+import db from "../../db.js";
 
 const home = (req,res)=>{
     return res.status(200).render('UI/home')
@@ -75,6 +77,18 @@ const passwordReset = async (req,res)=>{
 
 
 
+
+
+//admin processes
+const users = async (req,res) => {
+    res.locals.title = "Kullanıcılar"
+    const users = await db.query("SELECT *, roles.name as roleName FROM users inner join user_roles on users.id = user_roles.userId " + 
+    "inner join roles on user_roles.roleId = roles.id", { type: QueryTypes.SELECT });
+
+    console.log(users)
+    res.render("admin/users", {layout:"admin/layout", users})
+}
+
 const allAccess = async (req,res)=>{
     res.status(200).send("Public Content.");
 }
@@ -95,6 +109,7 @@ const moderatorBoard = async (req,res)=>{
 export default {
     home,
     passwordReset,
+    users,
     allAccess,
     userBoard,
     adminBoard,

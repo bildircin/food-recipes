@@ -8,6 +8,7 @@ import fileUpload from 'express-fileupload'
 import db from './db.js'
 import config from './app/config/auth.config.js'
 import jwt from "jsonwebtoken";
+import moment from 'moment'
 
 const app = express()
 app.use(session({
@@ -33,7 +34,7 @@ app.set("layout extractStyles", true)
 app.use(flash())
 app.use(fileUpload());
 
-
+app.locals.moment = moment;
 app.use((req,res, next)=>{
     
     app.locals.user = null

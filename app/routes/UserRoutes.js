@@ -19,6 +19,14 @@ router.post("/sifre-yenileme-talep", userController.passwordReset)
 
 
 
+
+
+
+
+//admin processes
+router.get("/admin/kullanicilar", userController.users)
+
+
 router.get("/api/test/all", userController.allAccess);
 
 router.get(

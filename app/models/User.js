@@ -1,6 +1,5 @@
 import Sequelize from 'sequelize'
 import db from '../../db.js'
-import Role from './Role.js';
 
 const User = db.define('User', {
     id:{
