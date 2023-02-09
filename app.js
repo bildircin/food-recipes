@@ -35,19 +35,17 @@ app.use(flash())
 app.use(fileUpload());
 
 app.locals.moment = moment;
-app.use((req,res, next)=>{
+app.use((req,res, next) => {
     
     app.locals.user = null
-    
     let token = req.cookies["usr-auth"];
     if (token) {
         jwt.verify(token, config.secret, (err, decoded) => {
             if (err) {
               app.locals.user = null
+            }else{
+                app.locals.user = decoded.hasOwnProperty("user") ? decoded.user : null;
             }
-            console.log('decoded')
-            console.log(decoded)
-            app.locals.user = decoded.hasOwnProperty("user") ? decoded.user : null;
         });
     }
     next()

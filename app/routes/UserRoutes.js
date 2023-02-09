@@ -25,6 +25,17 @@ router.post("/sifre-yenileme-talep", userController.passwordReset)
 
 //admin processes
 router.get("/admin/kullanicilar", userController.users)
+router.get("/admin/kullanici-guncelle/:id?", userController.userUpdate)
+
+
+
+
+
+
+
+
+
+
 
 
 router.get("/api/test/all", userController.allAccess);

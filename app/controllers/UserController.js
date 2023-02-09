@@ -6,6 +6,7 @@ import moment from "moment";
 import nodemailer from "nodemailer";
 import smtpTransport from "nodemailer-smtp-transport" ;
 import db from "../../db.js";
+import Role from "../models/UserRole.js";
 
 const home = (req,res)=>{
     return res.status(200).render('UI/home')
@@ -89,6 +90,22 @@ const users = async (req,res) => {
     res.render("admin/users", {layout:"admin/layout", users})
 }
 
+const userUpdate = async (req,res) => {
+    
+    const roles = await Role.findAll()
+
+    res.render("admin/userUpdate", {layout:"admin/layout", roles})
+}
+
+
+
+
+
+
+
+
+
+
 const allAccess = async (req,res)=>{
     res.status(200).send("Public Content.");
 }
@@ -110,6 +127,8 @@ export default {
     home,
     passwordReset,
     users,
+    userUpdate,
+
     allAccess,
     userBoard,
     adminBoard,
