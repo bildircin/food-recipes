@@ -54,10 +54,12 @@ app.use((req,res, next) => {
 import authRoutes from './app/routes/AuthRoutes.js'
 import userRoutes from './app/routes/UserRoutes.js'
 import recipeRoutes from './app/routes/RecipeRoutes.js'
+import adminHomeRoutes from './app/routes/AdminHomeRoutes.js'
 
 app.use(authRoutes)
 app.use(userRoutes)
 app.use(recipeRoutes)
+app.use(adminHomeRoutes)
 
 
 

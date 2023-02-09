@@ -81,7 +81,11 @@
                     </div>
                     <div class="mb-10">
                         <label class="required form-label">Şifre</label>
-                        <input type="text" class="form-control" id="password" name="password" value="<%= user.password %>" />
+                        <input type="text" class="form-control" id="password" name="password" value="" />
+                    </div>
+                    <div class="mb-10">
+                        <label class="required form-label">Şifre Tekrar</label>
+                        <input type="text" class="form-control" id="password2" name="password2" value="" />
                     </div>
 
                     <div class="form-check form-switch form-check-custom form-check-solid my-10">
@@ -95,8 +99,15 @@
                         <div class="col-md-2">
                             <a href="/kullanicilar" class="btn btn-block btn-dark" id="back_btn">GERİ</a>
                         </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary">GÜNCELLE</button>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary" id="save_btn">
+                                <span class="indicator-label">
+                                    GÜNCELLE
+                                </span>
+                                <span class="indicator-progress">
+                                    Lütfen Bekleyin... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </button>
                         </div>
                     </div>
                     
@@ -107,7 +118,7 @@
     </div>
 </div>
 
-<script src="../assets/global/plugins/jquery-form/jquery.form.js"></script>
+<script src="../../assets/global/plugins/jquery-form/jquery.form.js"></script>
 
 <script>
 $(document).ready(function () {
@@ -117,8 +128,6 @@ $(document).ready(function () {
 $('#user_update_form').ajaxForm({
     beforeSubmit: function (arr) {
         //global.showLoader()
-    },
-    beforeSend: function (e) {
 
         if ($('#first_name').val() == "") {
             toastr.warning("İsim giriniz");
@@ -180,6 +189,13 @@ $('#user_update_form').ajaxForm({
             //global.hideLoader()
             return false;
         }
+        
+        $('#save_btn').attr("data-kt-indicator", "on")
+        $('#save_btn').attr("disabled", "disabled")
+    },
+    beforeSend: function (e) {
+
+        
     },
     complete: function (result) {
         //global.hideLoader();
@@ -191,6 +207,9 @@ $('#user_update_form').ajaxForm({
         }else {
             toastr.error(result.responseJSON.message)
         }
+
+        $('#save_btn').removeAttr('data-kt-indicator')
+        $('#save_btn').removeAttr("disabled")
     }
 });
 

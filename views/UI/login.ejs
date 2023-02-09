@@ -93,12 +93,11 @@
             if (result.responseJSON.isSuccess) {
 				
 				$("#alert_content").css("color", "green").text(result.responseJSON.message)
-				$("#login-loader").css("display","none")
 				window.location.href = "/"
             }else{
-				$("#login-loader").css("display","none")
-				$("#alert_content").text(result.responseJSON.message)
+                $("#alert_content").text(result.responseJSON.message)
 			}
+            $("#login-loader").css("display","none")
         },
     })
 

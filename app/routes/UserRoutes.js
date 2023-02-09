@@ -14,7 +14,7 @@ router.use(function(req, res, next) {
 router.get("/", userController.home)
 
 router.post("/sifre-yenileme-talep", userController.passwordReset)
-//router.post("/sifre-yenileme/:uuid?", userController)
+router.post("/sifre-yenileme/:uuid?", userController.passwordResetEntry)
 
 
 
@@ -25,7 +25,7 @@ router.post("/sifre-yenileme-talep", userController.passwordReset)
 
 //admin processes
 router.get("/admin/kullanicilar", userController.users)
-router.get("/admin/kullanici-guncelle/:id?", userController.userUpdate)
+router.get("/admin/kullanici-guncelle/:id", userController.userUpdate)
 
 
 

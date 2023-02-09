@@ -6,7 +6,8 @@ import moment from "moment";
 import nodemailer from "nodemailer";
 import smtpTransport from "nodemailer-smtp-transport" ;
 import db from "../../db.js";
-import Role from "../models/UserRole.js";
+import Role from "../models/Role.js";
+import UserGender from "../models/UserGender.js";
 
 const home = (req,res)=>{
     return res.status(200).render('UI/home')
@@ -86,18 +87,38 @@ const users = async (req,res) => {
     const users = await db.query("SELECT *, roles.name as roleName FROM users inner join user_roles on users.id = user_roles.userId " + 
     "inner join roles on user_roles.roleId = roles.id", { type: QueryTypes.SELECT });
 
-    console.log(users)
     res.render("admin/users", {layout:"admin/layout", users})
 }
 
 const userUpdate = async (req,res) => {
-    
-    const roles = await Role.findAll()
 
-    res.render("admin/userUpdate", {layout:"admin/layout", roles})
+    const id = req.params.id;
+    const users = await db.query("SELECT *, roles.name as roleName FROM users inner join user_roles on users.id = user_roles.userId " + 
+    "inner join roles on user_roles.roleId = roles.id WHERE users.id=" + id, { type: QueryTypes.SELECT, bind:["active"] });
+    const roles = await Role.findAll()
+    const userGenders = await UserGender.findAll()
+    
+    const user = users.length > 0 ? users[0] : {}
+    
+    res.locals.title = user.userName + " Güncelleme"
+    res.render("admin/userUpdate", {layout:"admin/layout", user, roles, userGenders})
 }
 
+const passwordResetEntry = async (req,res) => {
 
+    const uuid = req.params.uuid;
+
+    const passwordReset = await PasswordReset.findOne({
+        where:{
+            uuid:uuid
+        }
+    })
+
+    if (passwordReset) {
+        res.render("")
+    }
+
+}
 
 
 
@@ -128,6 +149,7 @@ export default {
     passwordReset,
     users,
     userUpdate,
+    passwordResetEntry,
 
     allAccess,
     userBoard,
