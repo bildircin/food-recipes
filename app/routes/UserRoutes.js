@@ -13,15 +13,10 @@ router.use(function(req, res, next) {
 
 router.get("/", userController.home)
 
+// password processes
 router.post("/sifre-yenileme-talep", userController.passwordReset)
-router.post("/sifre-yenileme/:uuid?", userController.passwordResetEntry)
-
-
-
-
-
-
-
+router.get("/sifre-yenileme/:uuid?", userController.passwordResetEntry)
+router.post("/sifre-yenileme", userController.passwordResetAjax)
 
 //admin processes
 router.get("/admin/kullanicilar", userController.users)

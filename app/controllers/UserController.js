@@ -77,6 +77,34 @@ const passwordReset = async (req,res)=>{
     })
 }
 
+const passwordResetEntry = async (req,res) => {
+
+    const uuid = req.params.uuid;
+
+    const passwordReset = await PasswordReset.findOne({
+        where:{
+            uuid:uuid
+        }
+    })
+
+    if (passwordReset) {
+        res.render("UI/passwordResetEntry", {uuid:uuid})
+    }else{
+        res.status(404).render("UI/invalidPasswordUrl")
+    }
+}
+
+const passwordResetAjax = async (req,res) => {
+
+    const {password, password2} = req.body;
+
+    if(password != password2){
+        res.send({isSuccess:false, message:"Lütfen şifre tekrarını aynı giriniz!"})
+    }
+
+
+    
+}
 
 
 
@@ -104,21 +132,7 @@ const userUpdate = async (req,res) => {
     res.render("admin/userUpdate", {layout:"admin/layout", user, roles, userGenders})
 }
 
-const passwordResetEntry = async (req,res) => {
 
-    const uuid = req.params.uuid;
-
-    const passwordReset = await PasswordReset.findOne({
-        where:{
-            uuid:uuid
-        }
-    })
-
-    if (passwordReset) {
-        res.render("")
-    }
-
-}
 
 
 
@@ -150,6 +164,7 @@ export default {
     users,
     userUpdate,
     passwordResetEntry,
+    passwordResetAjax,
 
     allAccess,
     userBoard,
