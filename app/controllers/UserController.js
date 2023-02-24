@@ -8,6 +8,7 @@ import smtpTransport from "nodemailer-smtp-transport" ;
 import db from "../../db.js";
 import Role from "../models/Role.js";
 import UserGender from "../models/UserGender.js";
+import bcrypt from "bcryptjs";
 
 const home = (req,res)=>{
     return res.status(200).render('UI/home')
@@ -80,7 +81,7 @@ const passwordReset = async (req,res)=>{
 const passwordResetEntry = async (req,res) => {
 
     const uuid = req.params.uuid;
-
+    
     const passwordReset = await PasswordReset.findOne({
         where:{
             uuid:uuid
@@ -96,14 +97,45 @@ const passwordResetEntry = async (req,res) => {
 
 const passwordResetAjax = async (req,res) => {
 
-    const {password, password2} = req.body;
+    const {password, password2, uuid} = req.body;
 
     if(password != password2){
         res.send({isSuccess:false, message:"Lütfen şifre tekrarını aynı giriniz!"})
     }
 
+    const t = await db.transaction()
 
-    
+    try {
+        const passwordReset = await PasswordReset.findOne({
+            where:{
+                uuid:uuid
+            }
+        }, {transaction: t})
+
+        if (passwordReset) {
+            await User.update({
+                password: bcrypt.hashSync(password, 8)
+            },{
+                where:{
+                    email:passwordReset.email
+                }
+            }, { transaction: t})
+
+            await PasswordReset.destroy({
+                where:{
+                    uuid:uuid
+                }
+            }, {transaction: t})
+
+            await t.commit()
+            await res.status(200).send({isSuccess:true, message:"Şifre başarıyla yenilendi"})
+        }else{
+            await res.status(404).send({isSuccess:false, message:"Link bulunamadı, lütfen yeni şifre yenileme talebi oluşturunuz."})
+        }
+    } catch (error) {
+        await t.rollback()
+        await res.send({isSuccess:false, message:"Bir Hata oluştu, sayfayı yenileyip tekrar deneyiniz."})
+    }
 }
 
 

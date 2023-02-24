@@ -15,13 +15,14 @@ router.use(function(req, res, next) {
 router.get("/giris", authController.signin)
 router.post("/signinAjax", authController.signinAjax);
 router.get("/cikis", authController.logout);
+router.post("/captcha-reset", authController.captchaReset);
 
-router.post('/uyelik',
+router.post('/uye-ol',
     [
         verifySignUp.checkDuplicateUsernameOrEmail,
         verifySignUp.checkRolesExisted
     ],
-    authController.signup
+    authController.signupAjax
 )
 
 

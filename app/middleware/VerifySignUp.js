@@ -11,7 +11,7 @@ const checkDuplicateUsernameOrEmail = async (req, res, next) => {
     if (user) {
       res.status(400).send({
             isSuccess: false,
-            message: "Failed! Username is already in use!"
+            message: "Kullanıcı adı başka biri tarafından kullanılıyor!"
       });
       return;
     }
@@ -25,7 +25,7 @@ const checkDuplicateUsernameOrEmail = async (req, res, next) => {
       if (user) {
         res.status(400).send({
             isSuccess: false,
-            message: "Failed! Email is already in use!"
+            message: "Email başka biri tarafından kullanılıyor!"
         });
         return;
       }

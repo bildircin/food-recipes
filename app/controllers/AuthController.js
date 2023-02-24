@@ -7,16 +7,25 @@ import UserRole from "../models/UserRole.js"
 import db from "../../db.js"
 import moment from "moment/moment.js"
 import app from "../../app.js"
+import svgCaptcha from "svg-captcha"
+import UserGender from "../models/UserGender.js"
 
-const signup = async (req, res) => {
+const signupAjax = async (req, res) => {
   // Save User to Database
 
-    const {firstName, surName, userName, email, password, userGenderId} = req.body
+    const {firstName, surName, userName, email, password, gender, captcha} = req.body
 
     let nowDate = moment()
 
+    if(!req.session.captcha){
+      return res.status(404).send({isSuccess:false, message:"Captcha kodunu yenileyip tekrar deneyiniz!" });
+    }
+    if(req.session.captcha && req.session.captcha != captcha){
+      return res.status(404).send({isSuccess:false, message:"Captcha kodu hatalı, lütfen tekrar deneyiniz!" });
+    }
+
     await User.create({
-        userGenderId,
+        userGenderId:gender,
         firstName,
         surName,
         userName,
@@ -30,7 +39,6 @@ const signup = async (req, res) => {
     })
     .then(user => {
         // user role = 1
-        
         UserRole.create({
             roleId: 1,
             userId: user.id,
@@ -39,7 +47,7 @@ const signup = async (req, res) => {
             modifiedByUserID: null,
             modifiedDate: nowDate,
         }).then(() => {
-          res.send({isSuccess:true, message: "User was registered successfully!" });
+          res.send({isSuccess:true, message: "Kaydınız başarıyla oluşturuldu!" });
         })
         .catch(err => {
             res.status(500).send({isSuccess:false, message: err.message });
@@ -51,6 +59,7 @@ const signup = async (req, res) => {
 };
 
 const signinAjax = async (req, res) => {
+
   await User.findOne({
     where: {
         userName: req.body.userName
@@ -120,12 +129,27 @@ const logout = async (req,res) => {
 }
 
 const signin = async (req,res) => {
-  res.status(200).render("UI/login")
+
+  var captcha = svgCaptcha.create();
+  req.session.captcha = captcha.text;
+
+  const userGenders = await UserGender.findAll()
+  
+  res.status(200).render("UI/login", {captcha:captcha, userGenders:userGenders})
+}
+
+const captchaReset = async (req,res) => {
+
+  var captcha = svgCaptcha.create();
+  req.session.captcha = captcha.text;
+
+  res.status(200).send({isSuccess:true, captcha:captcha.data})
 }
 
 export default {
   signin,
   signinAjax,
   logout,
-  signup
+  signupAjax,
+  captchaReset
 }

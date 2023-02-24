@@ -1,3 +1,38 @@
+
+
+<style>
+	#gender_content {
+        width: 186px;
+		display: inline-block;
+    }
+	#alert_content,
+	#alert_content_email,
+	#alert_content_signup{
+		color: #e53d3f;
+	}
+    .select2-selection__rendered {
+        line-height: 31px !important;
+        font-size: 14px !important;
+    }
+    .select2-container .select2-selection--single {
+        height: 38px !important;
+		border: 1px solid #d5d5d5;
+    }
+    .select2-selection__arrow {
+        height: 36px !important;
+    }
+	#login-loader,
+	#login-loader-email,
+	#login-loader-signup{
+		display: none;
+		margin-left: 5px;
+	}
+	#captcha_reset_btn{
+		position: absolute;
+		top: 0;
+		right: 10px;
+	}
+</style>
 		
 <div id="container">
     <div id="content" class="clearfix homepage"><!-- SLIDER STARTS HERE -->
@@ -5,24 +40,25 @@
 
 			<ul class="tabs">
 				<li class="current">Giriş Yap<span></span></li>
+				<li>Üye Ol<span></span></li>
 				<li>Şifremi Unuttum<span></span></li>
 			</ul>
 
 			<div class="block current">
 				<form id="login_form" action="/signinAjax" method="post">
 
-					<p>
-						<label for="username">Kullanıcı Adı</label>
-						<input id="username" type="text" name="userName">
+					<p style="margin-bottom: 10px;">
+						<label for="usernameLogin">Kullanıcı Adı</label>
+						<input id="usernameLogin" type="text" name="username">
 					</p>
 					<p>
-						<label for="password">Şifre</label>
-						<input id="password" type="password" name="password">
+						<label for="passwordLogin">Şifre</label>
+						<input id="passwordLogin" type="password" name="password">
 					</p>
 					<p>
-						<input type="checkbox" value="forever" name="rememberme" id="remember" class="checkbox">
+						<!-- <input type="checkbox" value="forever" name="rememberme" id="remember" class="checkbox">
 						<label class="checkbox-label" for="remember">Beni Hatırla</label>
-						<br>
+						<br> -->
 						<input id="login-submit" class="submit_button readmore" type="submit" value="Giriş"
 								name="submit">
 
@@ -34,7 +70,66 @@
 					<p class="status"></p>
 				</form>
 			</div>
+			
+			<div class="block">
+				<form action="/uye-ol" id="signup_form" method="post">
+					<p style="margin-bottom: 10px;">
+						<label for="username">Kullanıcı Adı</label>
+						<input id="username" type="text" name="userName">
+					</p>
+					<p style="margin-bottom: 10px;">
+						<label for="firstName">Ad</label>
+						<input id="firstName" type="text" name="firstName">
+					</p>
+					<p style="margin-bottom: 10px;">
+						<label for="surName">Soyad</label>
+						<input id="surName" type="text" name="surName">
+					</p>
+					<p style="margin-bottom: 10px;">
+						<label for="email">Email</label>
+						<input id="email" type="text" name="email">
+					</p>
+					<div style="margin-bottom: 10px;">
+						<label>Cinsiyet</label>
+                        <div id="gender_content">
+                            <select id="gender" name="gender">
+								
+                                <% userGenders.forEach(item => { %>
+                                
+									<option value="<%= item.id %>"><%= item.name %></option>
+	
+								<% }); %> 
 
+                            </select>
+                        </div>
+					</div>
+					<p style="margin-bottom: 10px;">
+						<label for="password">Şifre</label>
+						<input id="password" type="password" name="password">
+					</p>
+					<p style="margin-bottom: 10px;">
+						<label for="password">Şifre (Tekrar)</label>
+						<input id="password2" type="password" name="password2">
+					</p>
+					<p style="margin-bottom: 10px;display: flex;align-items: center;">
+						<label for="captcha" id="captcha_label" style="position: relative;">
+							<a href="javascript:;" id="captcha_reset_btn">
+								<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M126.9 142.9c62.2-62.2 162.7-62.5 225.3-1L311 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H447.5c0 0 0 0 0 0H456c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L397.4 96.6c-87.6-86.5-228.7-86.2-315.8 1C57.2 122 39.6 150.7 28.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5c7.7-21.8 20.2-42.3 37.8-59.8zM0 312v7.6 .7V440c0 9.7 5.8 18.5 14.8 22.2s19.3 1.7 26.2-5.2l41.6-41.6c87.6 86.5 228.7 86.2 315.8-1c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.2 62.2-162.7 62.5-225.3 1L169 329c6.9-6.9 8.9-17.2 5.2-26.2s-12.5-14.8-22.2-14.8H32.4h-.7H24c-13.3 0-24 10.7-24 24z"/></svg>
+							</a>
+							<%- captcha.data %>
+						</label>
+						<input id="captcha" type="text" name="captcha">
+					</p>
+					
+					<p>
+						<input type="submit" class="readmore" name="user-submit" value="Kaydet"/>
+						<img id="login-loader-signup"
+								src="https://foodrecipes.inspirythemes.com/bootstrap/wp-content/themes/inspirythemes-food-recipes/images/loading.gif"
+								alt="Loader"/>
+						<span id="alert_content_signup"></span>
+					</p>
+				</form>
+			</div>
 			
 			<div class="block">
 				<form action="/sifre-yenileme-talep" id="forgot_password_form" method="post">
@@ -62,6 +157,10 @@
 
 	$(document).ready(function(){
 
+        $("#gender").select2({
+            width: "100%",
+            height: "46px"
+        })
 
 		$("#username").on("keyup", function(){
 			changeSetUsername()
@@ -131,6 +230,104 @@
         },
     })
 
+	$('#signup_form').ajaxForm({
+        beforeSubmit: function (arr) {
+			$("#login-loader-signup").css("display","inline-block")
+            $("#alert_content_signup").text("")
+
+			let userName = $("#username").val()
+			let firstName = $("#firstName").val()
+			let surName = $("#surName").val()
+			let gender = $("#gender").val()
+			let email = $("#email").val()
+			let password = $("#password").val()
+			let password2 = $("#password2").val()
+			let captcha = $("#captcha").val()
+			
+
+			if(userName == "" || userName == null){
+				$("#alert_content_signup").text("Kullanıcı adı giriniz!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			if(firstName == "" || firstName == null){
+				$("#alert_content_signup").text("Ad giriniz!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			if(surName == "" || surName == null){
+				$("#alert_content_signup").text("Soyad giriniz!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			if(gender == "" || gender == null){
+				$("#alert_content_signup").text("Cinsiyet seçiniz!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			if(captcha == "" || captcha == null){
+				$("#alert_content_signup").text("Captcha giriniz!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			if(email == "" || email == null){
+				$("#alert_content_signup").text("Email giriniz!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			if(email.search("@") == -1){
+				$("#alert_content_signup").text("Geçersiz mail adresi!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			if(password == "" || password == null){
+				$("#alert_content_signup").text("Şifre giriniz!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			if(password2 == "" || password2 == null){
+				$("#alert_content_signup").text("Şifre Tekrar giriniz!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			if(password != password2){
+				$("#alert_content_signup").text("Şifreler uyuşmuyor, tekrar deneyiniz!")
+				$("#login-loader-signup").css("display","none")
+				return false;
+			}
+			
+        },
+        beforeSend: function (e) {
+        },
+        complete: function (result) {
+			
+            if (result.responseJSON.isSuccess) {
+				$("#alert_content_signup").css("color", "green").text(result.responseJSON.message)
+            }else{
+				$("#alert_content_signup").text(result.responseJSON.message)
+			}
+			$("#login-loader-signup").css("display","none")
+        },
+    })
+
+	$("#captcha_reset_btn").on("click", function(){
+		let thisBtn = $(this)
+		thisBtn.css("display", "none")
+
+		$.post( "/captcha-reset", function(result) {
+            if (result.isSuccess) {
+				let captcha = result.captcha
+
+				$("#captcha_label > svg").remove()
+				$("#captcha_label").append(captcha)
+			}
+			thisBtn.css("display", "block")
+		})
+		.always(function() {
+			thisBtn.css("display", "block")
+		})
+	})
+	
 	function changeSetUsername() {
 
 		let usernameVal = $("#username").val();
@@ -150,4 +347,5 @@
 
 		$("#username").val(usernameVal);
 	}
+	
 </script>

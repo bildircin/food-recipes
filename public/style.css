@@ -1715,11 +1715,7 @@ img{
 .tabed .status{
     margin-left: 5px;
 }
-.tabed  #login-loader,
-#login-loader-email{
-    display: none;
-    margin-left: 5px;
-}
+
 #left-area .tabed .block br {
     clear: none;
     float: none;
@@ -1730,11 +1726,6 @@ img{
     height: 90px;
     float: left;;
     margin-left: 26px;
-}
-
-#alert_content,
-#alert_content_email{
-    color: #e53d3f;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -2153,7 +2144,7 @@ img{
 #left-area .uploader_buttons{
     margin-bottom: 10px;
 }
-#recipe-form label.plupload_button{
+.food-form label.plupload_button{
     display: inline-block;
     font-size: inherit;
 
@@ -4850,28 +4841,28 @@ img{
 /*-----------------------------------------------------------------------------------*/
 /*	16.	Submit Recipe Page Styles
 /*-----------------------------------------------------------------------------------*/
-#recipe-form #recipe-image {
+.food-form #recipe-image {
 }
 
-#recipe-form input[type="text"] {
+.food-form input[type="text"] {
     padding: 5px;
     width: 100%;
 }
 
-#recipe-form fieldset {
+.food-form fieldset {
     margin: 0 0 20px 0;
     position: relative;
     max-width: 100%;
 }
 
-#recipe-form label {
+.food-form label {
     display: block;
     color: #6F716B;
     font-size: 16px;
     margin: 0 0 10px 0;
 }
 
-#recipe-form label.error {
+.food-form label.error {
     color: red;
     font-size: 12px;
     position: absolute;
@@ -4879,11 +4870,11 @@ img{
     right: 0;
 }
 
-#recipe-form #title {
+.food-form #title {
     width: 400px;
 }
 
-#recipe-form fieldset .more-ingre-custom {
+.food-form fieldset .more-ingre-custom {
     font-size: 35px;
     position: absolute;
     right: 0;
@@ -4891,15 +4882,15 @@ img{
     cursor: pointer;
 }
 
-#recipe-form .incobjs input {
+.food-form .incobjs input {
     margin-bottom: 15px;
 }
 
-#recipe-form .incobjs input:last-child {
+.food-form .incobjs input:last-child {
     margin-bottom: 0;
 }
 
-#recipe-form #short-description {
+.food-form #short-description {
     width: 100%;
 }
 
@@ -4909,70 +4900,70 @@ img{
     text-align: right;
 }
 
-#recipe-form .recipe-title input.error {
+.food-form .recipe-title input.error {
     border: 1px solid red;
 }
 
-#recipe-form .content textarea.error {
+.food-form .content textarea.error {
     border: 1px solid red;
 }
 
-#recipe-form span.note {
+.food-form span.note {
     display: block;
     color: #1D7DA3;
     margin: 0 0 10px 0;
     font-size: 11px;
 }
 
-#recipe-form .recipe-detail {
+.food-form .recipe-detail {
     margin-bottom: 0;
 }
 
-#recipe-form .recipe-detail label {
+.food-form .recipe-detail label {
     display: inline-block;
     margin-right: 10px;
 }
 
-#recipe-form .recipe-detail div {
+.food-form .recipe-detail div {
     margin-bottom: 20px;
 }
 
-#recipe-form .recipe-detail input {
+.food-form .recipe-detail input {
     width: 30px;
     margin-right: 20px;
 }
 
-#recipe-form .recipe-detail input#yield {
+.food-form .recipe-detail input#yield {
     width: 200px;
 }
 
-#recipe-form .recipe-categories {
+.food-form .recipe-categories {
 }
 
-#recipe-form .recipe-categories label {
+.food-form .recipe-categories label {
     width: 120px;
     display: inline-block;
 }
 
-#recipe-form .recipe-categories label.for-tags {
+.food-form .recipe-categories label.for-tags {
     width: auto;
     margin-right: 10px;
 }
 
-#recipe-form .recipe-categories span.note {
+.food-form .recipe-categories span.note {
     display: inline;
 }
 
-#recipe-form .recipe-categories div {
+.food-form .recipe-categories div {
     margin-bottom: 20px;
 }
 
-#recipe-form .recipe-categories input#tags {
+.food-form .recipe-categories input#tags {
     width: 300px;
     margin-right: 10px;
 }
 
-#recipe-form .recipe-categories select {
+.food-form .recipe-categories select {
     width: 120px;
     border: 1px solid #efefef;
     color: #6F716B;
@@ -4980,14 +4971,14 @@ img{
     box-shadow: 0 2px 6px #E2E2E2 inset;
 }
 
-#recipe-form input[type="submit"] {
+.food-form input[type="submit"] {
     height: 27px;
     padding: 0 13px;
     background: url(images/button-bg-pink.png) repeat-x;
     cursor: pointer;
 }
 
-#recipe-form input[type="submit"]:hover {
+.food-form input[type="submit"]:hover {
     background-position: bottom;
 }
 
@@ -5006,10 +4997,9 @@ img{
 }
 
 #login-signup-forgot label {
-    width: 100px;
+    width: 150px;
     color: #6F716B;
     font-size: 14px;
-    margin: 0 0 10px 0;
 }
 
 #login-signup-forgot label.checkbox-label {
@@ -5044,12 +5034,12 @@ img{
     min-height: 30px;
 }
 
-#recipe-form fieldset.content table {
+.food-form fieldset.content table {
     padding: 0;
     margin: 0;
     border: 1px solid #e5eff8;
 }
-#recipe-form #wp-description-editor-container{
+.food-form #wp-description-editor-container{
     padding: 0;
     margin: 0;
 }
@@ -5057,7 +5047,7 @@ img{
     width: 100%;
     box-sizing: border-box;
 }
-#recipe-form fieldset.content td {
+.food-form fieldset.content td {
     padding: 0 2px !important;
     height: auto !important;
     line-height: normal !important;
