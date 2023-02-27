@@ -20,6 +20,7 @@ router.post("/sifre-yenileme", userController.passwordResetAjax)
 
 //admin processes
 router.get("/admin/kullanicilar", userController.users)
+router.get("/admin/kullanicilarAjax", userController.usersAjax)
 router.get("/admin/kullanici-guncelle/:id", userController.userUpdate)
 
 

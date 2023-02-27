@@ -16,7 +16,6 @@ router.get("/giris", authController.signin)
 router.post("/signinAjax", authController.signinAjax);
 router.get("/cikis", authController.logout);
 router.post("/captcha-reset", authController.captchaReset);
-
 router.post('/uye-ol',
     [
         verifySignUp.checkDuplicateUsernameOrEmail,

@@ -81,7 +81,7 @@ const passwordReset = async (req,res)=>{
 const passwordResetEntry = async (req,res) => {
 
     const uuid = req.params.uuid;
-    
+    console.log(uuid)
     const passwordReset = await PasswordReset.findOne({
         where:{
             uuid:uuid
@@ -150,6 +150,25 @@ const users = async (req,res) => {
     res.render("admin/users", {layout:"admin/layout", users})
 }
 
+const usersAjax = async (req,res) => {
+    console.log("geldi")
+    let list = {
+        "draw": 1,
+        "recordsTotal": 1,
+        "data": [
+          [
+            112,
+            "Satou",
+            "Accountant",
+            "Tokyo",
+            "28th Nov 08",
+            "$162,700"
+          ]
+        ]
+      }
+    res.json(list)
+}
+
 const userUpdate = async (req,res) => {
 
     const id = req.params.id;
@@ -194,6 +213,7 @@ export default {
     home,
     passwordReset,
     users,
+    usersAjax,
     userUpdate,
     passwordResetEntry,
     passwordResetAjax,

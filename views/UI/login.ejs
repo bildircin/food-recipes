@@ -49,7 +49,7 @@
 
 					<p style="margin-bottom: 10px;">
 						<label for="usernameLogin">Kullanıcı Adı</label>
-						<input id="usernameLogin" type="text" name="username">
+						<input id="usernameLogin" type="text" name="userName">
 					</p>
 					<p>
 						<label for="passwordLogin">Şifre</label>
@@ -171,8 +171,8 @@
         beforeSubmit: function (arr) {
 			$("#login-loader").css("display","inline-block")
 
-			let username = $("#username").val()
-			let password = $("#password").val()
+			let username = $("#usernameLogin").val()
+			let password = $("#passwordLogin").val()
 
 			if(username == "" || username == null){
 				$("#alert_content").text("Kullanıcı adı boş geçilemez!")

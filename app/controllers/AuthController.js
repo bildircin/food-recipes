@@ -60,6 +60,8 @@ const signupAjax = async (req, res) => {
 
 const signinAjax = async (req, res) => {
 
+
+  
   await User.findOne({
     where: {
         userName: req.body.userName
