@@ -151,21 +151,63 @@ const users = async (req,res) => {
 }
 
 const usersAjax = async (req,res) => {
-    console.log("geldi")
+    
+    res.locals.title = "Kullanıcılar"
+/*     const { draw } = req.query
+
+    const users = await User.findAll({
+        where:{
+            isDeleted:false
+        }
+    }) */
+    
     let list = {
-        "draw": 1,
-        "recordsTotal": 1,
+        "draw": 2,
+        "recordsTotal": 10,
+        "recordsFiltered": 10,
         "data": [
-          [
-            112,
-            "Satou",
-            "Accountant",
-            "Tokyo",
-            "28th Nov 08",
-            "$162,700"
-          ]
+            [
+                "Charde",
+                "Marshall",
+                "Regional Director",
+                "San Francisco",
+                "16th Oct 08",
+                "$470,600"
+            ]
         ]
-      }
+    }
+
+    if (req.query.draw == 1) {
+        list = {
+            "draw": req.query.draw,
+            "recordsTotal": 1,
+            "data": [
+              [
+                112,
+                "Satou",
+                "Accountant",
+                "Tokyo",
+                "28th Nov 08",
+                "$162,700"
+              ]
+            ]
+          }
+    }else{
+        list = {
+            "draw": req.query.draw,
+            "recordsTotal": 1,
+            "data": [
+              [
+                113,
+                "aaa",
+                "Accountant",
+                "Tokyo",
+                "28th Nov 08",
+                "$162,700"
+              ]
+            ]
+          }
+    }
     res.json(list)
 }
 
