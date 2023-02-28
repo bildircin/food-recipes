@@ -153,62 +153,59 @@ const users = async (req,res) => {
 const usersAjax = async (req,res) => {
     
     res.locals.title = "Kullanıcılar"
-/*     const { draw } = req.query
 
-    const users = await User.findAll({
-        where:{
-            isDeleted:false
-        }
-    }) */
-    
-    let list = {
-        "draw": 2,
-        "recordsTotal": 10,
-        "recordsFiltered": 10,
-        "data": [
-            [
-                "Charde",
-                "Marshall",
-                "Regional Director",
-                "San Francisco",
-                "16th Oct 08",
-                "$470,600"
-            ]
-        ]
-    }
+    const { draw, start, length, order_data } = req.query;
 
-    if (req.query.draw == 1) {
-        list = {
-            "draw": req.query.draw,
-            "recordsTotal": 1,
-            "data": [
-              [
-                112,
-                "Satou",
-                "Accountant",
-                "Tokyo",
-                "28th Nov 08",
-                "$162,700"
-              ]
-            ]
-          }
-    }else{
-        list = {
-            "draw": req.query.draw,
-            "recordsTotal": 1,
-            "data": [
-              [
-                113,
-                "aaa",
-                "Accountant",
-                "Tokyo",
-                "28th Nov 08",
-                "$162,700"
-              ]
-            ]
-          }
-    }
-    res.json(list)
+    //search data
+    var search_value = req.query.search['value'];
+
+    var search_query = `
+    AND ( userName LIKE '%${search_value}%' 
+    OR firstName LIKE '%${search_value}%' 
+    OR surName LIKE '%${search_value}%' 
+    OR email LIKE '%${search_value}%'
+    )
+    `;
+
+    db.query("SELECT COUNT(*) AS Total FROM users", function(error, data){
+        var total_records = data[0].Total;
+        console.log(data[0])
+        db.query(`SELECT COUNT(*) AS Total FROM users WHERE 1 ${search_query}`, function(error, data){
+            var total_records_with_filter = data[0].Total;
+
+            var query = `
+                SELECT * FROM users 
+                WHERE 1 ${search_query} 
+                ORDER BY ${column_name} ${column_sort_order} 
+                LIMIT ${start}, ${length}
+            `;
+
+            var data_arr = [];
+
+            db.query(query, function(error, data){
+                data.forEach(function(row){
+                    data_arr.push({
+                        'user_id' : row.user_id,
+                        'user_name' : row.user_name,
+                        'user_user_name' : row.user_user_name,
+                        'user_email' : row.user_email,
+                        'user_role' : row.user_role,
+                        'user_active' : row.user_active,
+                        'user_action' : row.user_action
+                    });
+                });
+
+                var output = {
+                    'draw' : draw,
+                    'iTotalRecords' : total_records,
+                    'iTotalDisplayRecords' : total_records_with_filter,
+                    'aaData' : data_arr
+                };
+
+                res.json(output);
+            })
+        })
+    })
 }
 
 const userUpdate = async (req,res) => {

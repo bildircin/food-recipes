@@ -95,6 +95,16 @@
             processing: true,
             serverSide: true,
             ajax: '/admin/kullanicilarAjax',
+            'aaSorting' : [],
+            'columns' : [
+                { data : 'user_id' },
+                { data : 'user_name' },
+                { data : 'user_user_name' },
+                { data : 'user_email' },
+                { data : 'user_role' },
+                { data : 'user_active' },
+                { data : 'user_action' }
+            ],
             columnDefs:[
                 {
                     targets:6,
