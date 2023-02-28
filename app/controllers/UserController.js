@@ -151,9 +151,6 @@ const users = async (req,res) => {
 }
 
 const usersAjax = async (req,res) => {
-    
-    res.locals.title = "Kullanıcılar"
-
     const { draw, start, length, order_data } = req.query;
 
     //search data
@@ -164,48 +161,44 @@ const usersAjax = async (req,res) => {
     OR firstName LIKE '%${search_value}%' 
     OR surName LIKE '%${search_value}%' 
     OR email LIKE '%${search_value}%'
-    )
+    )`;
+
+    let total_records = await User.count()
+    
+    let total_records_with_filter = await db.query(`SELECT COUNT(*) AS Total FROM users WHERE 1 ${search_query}`, { type: QueryTypes.SELECT })
+    total_records_with_filter = total_records_with_filter.length > 0 ? total_records_with_filter[0].Total : null
+
+    var query = `
+        SELECT *, roles.name as roleName FROM users inner join user_roles on users.id = user_roles.userId inner join roles on user_roles.roleId = roles.id
+        WHERE 1 ${search_query} 
+        LIMIT ${start}, ${length}
     `;
+    var data_arr = [];
 
-    db.query("SELECT COUNT(*) AS Total FROM users", function(error, data){
-        var total_records = data[0].Total;
-        console.log(data[0])
-        db.query(`SELECT COUNT(*) AS Total FROM users WHERE 1 ${search_query}`, function(error, data){
-            var total_records_with_filter = data[0].Total;
+    let data = await db.query(query, { type: QueryTypes.SELECT });
 
-            var query = `
-                SELECT * FROM users 
-                WHERE 1 ${search_query} 
-                ORDER BY ${column_name} ${column_sort_order} 
-                LIMIT ${start}, ${length}
-            `;
+    data.forEach(function(user){
+        data_arr.push({
+            'user_id' : user.id,
+            'user_name' : user.firstName + " " + user.surName,
+            'user_user_name' : user.userName,
+            'user_email' : user.email,
+            'user_role' : user.roleName,
+            'user_active' : user.active
+        });
+    });
+    
+    var output = {
+        'draw' : draw,
+        'iTotalRecords' : total_records,
+        'iTotalDisplayRecords' : total_records_with_filter,
+        'aaData' : data_arr
+    };
 
-            var data_arr = [];
+    res.json(output);
 
-            db.query(query, function(error, data){
-                data.forEach(function(row){
-                    data_arr.push({
-                        'user_id' : row.user_id,
-                        'user_name' : row.user_name,
-                        'user_user_name' : row.user_user_name,
-                        'user_email' : row.user_email,
-                        'user_role' : row.user_role,
-                        'user_active' : row.user_active,
-                        'user_action' : row.user_action
-                    });
-                });
 
-                var output = {
-                    'draw' : draw,
-                    'iTotalRecords' : total_records,
-                    'iTotalDisplayRecords' : total_records_with_filter,
-                    'aaData' : data_arr
-                };
-
-                res.json(output);
-            })
-        })
-    })
+   
 }
 
 const userUpdate = async (req,res) => {
