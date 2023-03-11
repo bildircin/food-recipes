@@ -153,20 +153,18 @@ const users = async (req,res) => {
 const usersAjax = async (req,res) => {
     const { draw, start, length, order_data } = req.query;
 
-    //search data
     var search_value = req.query.search['value'];
-
     var search_query = `
     AND ( userName LIKE '%${search_value}%' 
     OR firstName LIKE '%${search_value}%' 
     OR surName LIKE '%${search_value}%' 
+    OR concat(firstName, " ", surName) LIKE '%${search_value}%' 
     OR email LIKE '%${search_value}%'
     )`;
 
     let total_records = await User.count()
     
     let total_records_with_filter = await db.query(`SELECT COUNT(*) AS Total FROM users WHERE 1 ${search_query}`, { type: QueryTypes.SELECT })
-    total_records_with_filter = total_records_with_filter.length > 0 ? total_records_with_filter[0].Total : null
 
     var query = `
         SELECT *, roles.name as roleName FROM users inner join user_roles on users.id = user_roles.userId inner join roles on user_roles.roleId = roles.id
@@ -175,9 +173,9 @@ const usersAjax = async (req,res) => {
     `;
     var data_arr = [];
 
-    let data = await db.query(query, { type: QueryTypes.SELECT });
+    let users = await db.query(query, { type: QueryTypes.SELECT });
 
-    data.forEach(function(user){
+    users.forEach(function(user){
         data_arr.push({
             'user_id' : user.id,
             'user_name' : user.firstName + " " + user.surName,
